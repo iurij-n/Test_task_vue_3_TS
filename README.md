@@ -87,7 +87,7 @@ src/components/users/
 
 1. **Клонируйте репозиторий:**
    ```bash
-   git clone <URL_РЕПОЗИТОРИЯ>
+   git clone (https://github.com/iurij-n/Test_task_vue_3_TS.git)
    cd Test_task_vue_3_TS
    ```
 
