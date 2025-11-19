@@ -100,10 +100,14 @@ src/components/users/
 1. **Клонируйте репозиторий:**
    ```bash
    git clone https://github.com/iurij-n/Test_task_vue_3_TS.git
+   ```
+
+2. **Перейдите в папку проекта:**
+   ```bash
    cd Test_task_vue_3_TS
    ```
 
-2. **Установите зависимости:**
+3. **Установите зависимости:**
    ```bash
    npm install
    # или
