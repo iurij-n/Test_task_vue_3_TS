@@ -41,7 +41,9 @@
 3. **Установите зависимости:**
    ```bash
    npm install
-   # или
+   ```
+   или
+   ```bash
    yarn install
    ```
 
