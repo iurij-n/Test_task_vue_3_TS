@@ -77,7 +77,7 @@ onMounted(() => {
   </div>
 </template>
 
-<style scoped>
+<style>
 .user-table-container {
   padding: 20px;
   background: #f5f5f5;
