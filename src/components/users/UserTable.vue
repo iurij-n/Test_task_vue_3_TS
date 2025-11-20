@@ -61,11 +61,10 @@ onMounted(() => {
     </div>
 
     <div v-if="!isLoading && !error" class="table-wrapper">
-      <table v-if="paginatedUsers.length" class="user-table">
+      <template v-if="paginatedUsers.length">
         <UserTableBody :users="paginatedUsers" />
-      </table>
-      <UserTablePagination v-if="!isLoading && !error" />
-
+        <UserTablePagination v-if="!isLoading && !error" />
+      </template>
       <div v-if="!paginatedUsers.length" class="no-data">
         <p>Нет данных для отображения</p>
         <button @click="clearAllFilters" class="btn btn-primary">Сбросить фильтры</button>
