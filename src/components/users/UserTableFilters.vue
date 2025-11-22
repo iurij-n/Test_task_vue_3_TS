@@ -1,38 +1,33 @@
 <script setup lang="ts">
 import { inject } from 'vue';
 
-const {
-  clearDateFilter,
-  dateFrom,
-  dateTo,
-  filterStatus
-} = inject('userTableState')!;
+const { clearDateFilter, dateFrom, dateTo, filterStatus } = inject('userTableState')!;
 
 const emit = defineEmits<{ 'clear-all': [] }>();
 
-const setFilterStatus = (status: string) => filterStatus.value = status as any;
+const setFilterStatus = (status: string) => (filterStatus.value = status as any);
 </script>
 
 <template>
-  <div class="filters-section">
-    <div class="filter-group">
-      <label>Статус:</label>
-      <button :class="['filter-btn', { active: filterStatus === '' }]" @click="setFilterStatus('')">
-        Все
-      </button>
-      <button :class="['filter-btn', { active: filterStatus === 'active' }]" @click="setFilterStatus('active')">
-        Активные
-      </button>
-      <button :class="['filter-btn', { active: filterStatus === 'inactive' }]" @click="setFilterStatus('inactive')">
-        Неактивные
-      </button>
+    <div class="filters-section">
+        <div class="filter-group">
+            <label>Статус:</label>
+            <button :class="['filter-btn', { active: filterStatus === '' }]" @click="setFilterStatus('')"> Все </button>
+            <button :class="['filter-btn', { active: filterStatus === 'active' }]" @click="setFilterStatus('active')">
+                 Активные
+            </button>
+            <button
+                :class="['filter-btn', { active: filterStatus === 'inactive' }]"
+                @click="setFilterStatus('inactive')">
+                 Неактивные
+            </button>
+        </div>
+        <div class="filter-group">
+            <label>Дата регистрации:</label>
+            <input v-model="dateFrom" type="date" class="date-input" />
+            <span>-</span>
+            <input v-model="dateTo" type="date" class="date-input" />
+            <button class="btn-clear" @click="clearDateFilter"> Очистить</button>
+        </div>
     </div>
-    <div class="filter-group">
-      <label>Дата регистрации:</label>
-      <input v-model="dateFrom" type="date" class="date-input" />
-      <span>-</span>
-      <input v-model="dateTo" type="date" class="date-input" />
-      <button @click="clearDateFilter" class="btn-clear">Очистить</button>
-    </div>
-  </div>
 </template>

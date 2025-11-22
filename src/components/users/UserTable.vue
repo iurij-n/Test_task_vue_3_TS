@@ -1,79 +1,78 @@
 <script setup lang="ts">
-import { onMounted, watch, provide } from 'vue'
-import UserTableHeader from './UserTableHeader.vue'
-import UserTableFilters from './UserTableFilters.vue'
-import UserTableBody from './UserTableBody.vue'
-import UserTablePagination from './UserTablePagination.vue'
-import AddUserModal from './AddUserModal.vue'
-import UserDetailsModal from './UserDetailsModal.vue'
+import { onMounted, watch, provide } from 'vue';
+import UserTableHeader from './UserTableHeader.vue';
+import UserTableFilters from './UserTableFilters.vue';
+import UserTableBody from './UserTableBody.vue';
+import UserTablePagination from './UserTablePagination.vue';
+import AddUserModal from './AddUserModal.vue';
+import UserDetailsModal from './UserDetailsModal.vue';
 
-import { useUserTable } from '@/composables/useUserTable'
+import { useUserTable } from '@/composables/useUserTable';
 
-const props = withDefaults(defineProps<{
-  title?: string
-  initialPageSize?: number
-  apiEndpoint?: string
-}>(), {
-  title: 'Управление пользователями',
-  initialPageSize: 25,
-  apiEndpoint: '/api/users'
-})
+const props = withDefaults(
+    defineProps<{
+        title?: string;
+        initialPageSize?: number;
+        apiEndpoint?: string;
+    }>(),
+    {
+        title: 'Управление пользователями',
+        initialPageSize: 25,
+        apiEndpoint: '/api/users'
+    }
+);
 
-const userTableState = useUserTable({ initialPageSize: props.initialPageSize })
+const userTableState = useUserTable({ initialPageSize: props.initialPageSize });
 
 const {
-  clearAllFilters,
-  error,
-  filterRole,
-  filterStatus,
-  filteredAndSearchedUsers,
-  isLoading,
-  loadUsers,
-  paginatedUsers,
-  resetPage,
-  searchQuery
-} = userTableState
+    clearAllFilters,
+    error,
+    filterRole,
+    filterStatus,
+    filteredAndSearchedUsers,
+    isLoading,
+    loadUsers,
+    paginatedUsers,
+    resetPage,
+    searchQuery
+} = userTableState;
 
-provide('userTableState', userTableState)
+provide('userTableState', userTableState);
 
 watch([searchQuery, filterRole, filterStatus], () => {
-  resetPage()
-})
+    resetPage();
+});
 
 onMounted(() => {
-  loadUsers()
-})
+    loadUsers();
+});
 </script>
 
 <template>
-  <div class="user-table-container">
-    <UserTableHeader :title="props.title" :total-count="filteredAndSearchedUsers.length" />
-    <UserTableFilters @clear-all="clearAllFilters" />
-    
-    <div v-if="isLoading" class="loading-overlay">
-      <div class="spinner"></div>
-      <p>Загрузка данных...</p>
+    <div class="user-table-container">
+        <UserTableHeader :title="props.title" :total-count="filteredAndSearchedUsers.length" />
+        <UserTableFilters @clear-all="clearAllFilters" />
+        <div v-if="isLoading" class="loading-overlay">
+            <div class="spinner"></div>
+            <p>Загрузка данных...</p>
+        </div>
+        <div v-if="error" class="error-message">
+            <span>Ошибка: {{ error }}</span>
+            <button class="btn-retry" @click="loadUsers">Повторить</button>
+        </div>
+        <div v-if="!isLoading && !error" class="table-wrapper">
+            <template v-if="paginatedUsers.length">
+                <UserTableBody :users="paginatedUsers" />
+                <UserTablePagination v-if="!isLoading && !error" />
+            </template>
+            <div v-if="!paginatedUsers.length" class="no-data">
+                <p>Нет данных для отображения</p>
+                <button class="btn btn-primary" @click="clearAllFilters"> Сбросить фильтры</button>
+            </div>
+        </div>
+        <AddUserModal />
+        <UserDetailsModal />
     </div>
-
-    <div v-if="error" class="error-message">
-      <span>Ошибка: {{ error }}</span>
-      <button @click="loadUsers" class="btn-retry">Повторить</button>
-    </div>
-
-    <div v-if="!isLoading && !error" class="table-wrapper">
-      <template v-if="paginatedUsers.length">
-        <UserTableBody :users="paginatedUsers" />
-        <UserTablePagination v-if="!isLoading && !error" />
-      </template>
-      <div v-if="!paginatedUsers.length" class="no-data">
-        <p>Нет данных для отображения</p>
-        <button @click="clearAllFilters" class="btn btn-primary">Сбросить фильтры</button>
-      </div>
-    </div>
-
-    <AddUserModal />
-    <UserDetailsModal />
-  </div>
 </template>
 
 <style>
@@ -734,3 +733,4 @@ onMounted(() => {
   text-transform: uppercase;
 }
 </style>
+
