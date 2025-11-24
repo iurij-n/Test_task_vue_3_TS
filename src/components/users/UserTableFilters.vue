@@ -1,7 +1,12 @@
 <script setup lang="ts">
-import { inject } from 'vue';
+import { useUserTable } from '@/composables/useUserTable';
 
-const { clearDateFilter, dateFrom, dateTo, filterStatus } = inject('userTableState')!;
+const {
+    clearDateFilter,
+    dateFrom,
+    dateTo,
+    filterStatus
+} = useUserTable();
 
 const emit = defineEmits<{ 'clear-all': [] }>();
 

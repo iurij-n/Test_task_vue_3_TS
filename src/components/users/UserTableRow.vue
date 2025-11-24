@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { computed, inject } from 'vue';
+import { computed } from 'vue';
+import { useUserTable } from '@/composables/useUserTable';
 import type { User } from '@/types/user';
 
 const props = defineProps<{
@@ -22,7 +23,7 @@ const {
     startEdit,
     toggleSelectUser,
     toggleUserStatus
-} = inject('userTableState')!;
+} = useUserTable();
 
 const isSelected = computed(() => selectedUsers.value.includes(props.user.id));
 const isEditing = computed(() => editingUserId.value === props.user.id);

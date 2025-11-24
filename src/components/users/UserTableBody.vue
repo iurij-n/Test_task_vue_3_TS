@@ -1,11 +1,17 @@
 <script setup lang="ts">
 import type { User } from '@/types/user';
 import UserTableRow from './UserTableRow.vue';
-import { inject } from 'vue';
+import { useUserTable } from '@/composables/useUserTable';
 
 defineProps<{ users: User[] }>();
 
-const { isAllSelected, sortBy, sortColumn, sortDirection, toggleSelectAll } = inject('userTableState')!;
+const {
+    isAllSelected,
+    sortBy,
+    sortColumn,
+    sortDirection,
+    toggleSelectAll
+} = useUserTable();
 </script>
 
 <template>

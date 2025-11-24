@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { inject } from 'vue';
+import { useUserTable } from '@/composables/useUserTable';
 
 const {
     closeDetailsModal,
@@ -9,7 +9,7 @@ const {
     getRoleLabel,
     selectedUser,
     showDetailsModal
-} = inject('userTableState')!;
+} = useUserTable();
 </script>
 
 <template>

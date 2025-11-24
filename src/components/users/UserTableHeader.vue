@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { inject } from 'vue';
+import { useUserTable } from '@/composables/useUserTable';
 
 const props = defineProps<{
     title: string;
@@ -15,7 +15,7 @@ const {
     searchQuery,
     selectedUsers,
     showAllUsers
-} = inject('userTableState')!;
+} = useUserTable();
 </script>
 
 <template>

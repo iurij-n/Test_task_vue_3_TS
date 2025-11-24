@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { inject } from 'vue';
+import { useUserTable } from '@/composables/useUserTable';
 
 const {
     currentPage,
@@ -10,7 +10,7 @@ const {
     filteredAndSearchedUsers,
     pageSize,
     goToPage
-} = inject('userTableState')!;
+} = useUserTable();
 
 const handlePageSizeChange = () => (currentPage.value = 1);
 </script>

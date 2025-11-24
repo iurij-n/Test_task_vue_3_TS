@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { inject } from 'vue';
+import { useUserTable } from '@/composables/useUserTable';
 
 const {
     addNewUser,
@@ -11,7 +11,7 @@ const {
     showAddUserModal,
     validateNewUserEmail,
     validateNewUserName
-} = inject('userTableState')!;
+}  = useUserTable();
 </script>
 
 <template>
