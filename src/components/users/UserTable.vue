@@ -613,6 +613,8 @@ onMounted(() => {
 
 .form-group {
   margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
 }
 
 .form-group label {
@@ -625,7 +627,6 @@ onMounted(() => {
 .form-group input[type="text"],
 .form-group input[type="email"],
 .form-group select {
-  width: 100%;
   padding: 10px;
   border: 1px solid #ddd;
   border-radius: 4px;
